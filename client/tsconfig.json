@@ -1,0 +1,11 @@
+//THIS IS A MOCK TSCONFIG USED TO CONFIGURE SHADCN PATH.
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        }
+    }
+}
