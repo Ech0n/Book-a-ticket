@@ -65,7 +65,7 @@ const events = [
         name: "Festiwal Kina Europejskiego",
         subtitle: "Kino Kultura – 3 dni seansów i spotkań",
         description: "Ponad 20 filmów z całej Europy, spotkania z reżyserami i warsztaty filmowe. Bilety jednodniowe i karnety dostępne online.",
-        date: "2025-10-05",
+        date: "2025-7-05",
         time: "17:00",
     },
     {
@@ -73,7 +73,7 @@ const events = [
         name: "Stand-up: Rafał Pacześ",
         subtitle: "Nowy program „Gorzkie Żale”",
         description: "Najbardziej rozpoznawalny stand-uper w Polsce wraca z nowym programem pełnym ciętego humoru i szczerych spostrzeżeń.",
-        date: "2025-09-30",
+        date: "2025-07-30",
         time: "20:30",
     },
     {
@@ -113,7 +113,7 @@ const events = [
         name: "Warsztaty Ceramiki Artystycznej",
         subtitle: "Tworzenie własnych dzieł z gliny",
         description: "Zajęcia praktyczne dla dorosłych i młodzieży. Możliwość stworzenia unikalnej ceramiki i wypalenia jej na miejscu.",
-        date: "2025-09-07",
+        date: "2025-07-07",
         time: "15:00",
     },
     {

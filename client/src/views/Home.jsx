@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/Skeleton"
 import { Separator } from "@/components/ui/Separator"
 import { events, featuredEvents } from "../mockData"
 import EventList from "../components/eventList";
+import Calendar from "../components/Calendar";
 
 function Home() {
     return <>
@@ -11,9 +12,10 @@ function Home() {
             <Featured events={featuredEvents} />
             <Separator className="mt-6 mb-1" />
             <h2 className="my-2">Kalendarz wydarzeń:</h2>
-            {/* Place holder ⬇ */}
-            <Skeleton className="h-[370px] w-full" />
+            {/* TODO: ZAmienic na nadchodzace wydarzenia ⬇ */}
+            <Calendar events={events} />
             <Separator className="mt-6 mb-1" />
+
             <h2 className="my-3">Wydarzenia:</h2>
             <EventList events={events} />
         </div>
