@@ -1,4 +1,4 @@
-
+import * as React from "react"
 import {
     Carousel,
     CarouselContent,
@@ -9,10 +9,18 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import Autoplay from "embla-carousel-autoplay"
+
+
 function Featured({ events }) {
-    console.log(events)
+    const plugin = React.useRef(
+        Autoplay({ delay: 5000, stopOnInteraction: true })
+    )
     return <>
-        <Carousel>
+        <Carousel
+            plugins={[plugin.current]}
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.play}>
             <CarouselContent>
                 {events.map((event) => (
                     <CarouselItem key={event.id} className="basis-1/1">
