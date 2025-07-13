@@ -1,4 +1,14 @@
 import { Link } from 'react-router-dom';
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
 
 export default function Navbar() {
     return (
@@ -8,15 +18,44 @@ export default function Navbar() {
             </Link>
             <div className="flex items-center gap-6">
                 <div className="flex items-center gap-6">
-                    <Link to="/" className="text-gray-700 hover:text-blue-600">
-                        Home
-                    </Link>
-                    <Link to="/events" className="text-gray-700 hover:text-blue-600">
-                        Events
-                    </Link>
-                    <Link to="/about" className="text-gray-700 hover:text-blue-600">
-                        About
-                    </Link>
+                    <NavigationMenu viewport={false}>
+                        <NavigationMenuList>
+                            <NavigationMenuItem>
+                                <NavigationMenuLink asChild>
+                                    <Link to="/" className="text-gray-700 hover:text-blue-600">
+                                        Home
+                                    </Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+                            <NavigationMenuItem>
+                                <NavigationMenuLink asChild>
+                                    <Link to="/about" className="text-gray-700 hover:text-blue-600">
+                                        About
+                                    </Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>Events</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <NavigationMenuLink asChild>
+                                        <Link to="/events" className="text-gray-700 hover:text-blue-600">
+                                            All events
+                                        </Link>
+                                    </NavigationMenuLink>
+                                    <NavigationMenuLink asChild>
+                                        <Link to="/upcoming" className="text-gray-700 hover:text-blue-600">
+                                            Upcoming
+                                        </Link>
+                                    </NavigationMenuLink>
+                                    <NavigationMenuLink asChild>
+                                        <Link to="/calendar" className="text-gray-700 hover:text-blue-600">
+                                            Calendar
+                                        </Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                        </NavigationMenuList>
+                    </NavigationMenu>
                 </div>
 
                 <div className="w-px h-6 bg-gray-300 mx-4"></div>
@@ -29,6 +68,7 @@ export default function Navbar() {
                     />
                     <span className="text-gray-700"></span>
                 </Link>
+
             </div>
         </nav>
     );
