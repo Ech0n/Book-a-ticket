@@ -2,12 +2,17 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { format, isToday, isTomorrow, parseISO, differenceInCalendarDays } from "date-fns";
 import { enUS } from "date-fns/locale";
+import { DataContext } from '../DataProvider';
+import { useContext } from 'react';
+import { Skeleton } from "@/components/ui/Skeleton"
 
 //TODO: Limit to 3 items total not 3 groups because this can brake layout
-export default function Upcoming({ events, maxItems }) {
+export default function Upcoming({ maxItems }) {
+    const { allEvents, loading, error } = useContext(DataContext);
+
     const now = new Date();
 
-    const sortedEvents = [...events]
+    const sortedEvents = [...allEvents]
         .map(ev => {
             const dateTimeStr = `${ev.date}T${ev.time}`;
             return {
@@ -41,6 +46,24 @@ export default function Upcoming({ events, maxItems }) {
         }
         grouped[groupLabel].push(ev);
     }
+
+    if (loading) {
+        let size = (maxItems) ? maxItems : 12
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-3  ">
+                {Array.from({ length: size }).map((_, idx) => (
+                    <div className="p-1" key={idx}>
+                        <Skeleton className="h-[255px] w-full " />
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    if (error) {
+        return <div className="text-red-500">Error loading events.</div>;
+    }
+
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

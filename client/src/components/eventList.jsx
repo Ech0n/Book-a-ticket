@@ -4,13 +4,34 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-function EventList({ events }) {
-    console.log(events)
+import { DataContext } from '../DataProvider';
+import { useContext } from 'react';
+import { Skeleton } from "@/components/ui/Skeleton"
+
+function EventList() {
+    const { allEvents, loading, error } = useContext(DataContext);
+
     const ITEMS_PER_PAGE = 6;
     const [page, setPage] = useState(1);
 
-    const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
-    const paginatedEvents = events.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(allEvents.length / ITEMS_PER_PAGE);
+    const paginatedEvents = allEvents.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-3  ">
+                {Array.from({ length: ITEMS_PER_PAGE }).map((_, idx) => (
+                    <div className="p-1" key={idx}>
+                        <Skeleton className="h-[255px] w-full " />
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    if (error) {
+        return <div className="text-red-500">Error loading events.</div>;
+    }
 
     return (
         <>

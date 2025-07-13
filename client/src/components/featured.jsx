@@ -1,4 +1,3 @@
-import * as React from "react"
 import {
     Carousel,
     CarouselContent,
@@ -10,19 +9,36 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay"
+import DataProvider, { DataContext } from '../DataProvider';
+import React, { useContext } from 'react';
+import { Skeleton } from "@/components/ui/Skeleton"
 
 
-function Featured({ events }) {
+function Featured() {
+
     const plugin = React.useRef(
         Autoplay({ delay: 5000, stopOnInteraction: true })
     )
+    const { featuredEvents, loading, error } = useContext(DataContext);
+    if (loading) {
+        return (
+            <div className="p-1" >
+                <Skeleton className="h-[255px] w-full " />
+            </div>
+        );
+    }
+
+    if (error) {
+        return <div className="text-red-500">Error loading events.</div>;
+    }
+
     return <>
         <Carousel
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.play}>
             <CarouselContent>
-                {events.map((event) => (
+                {featuredEvents.map((event) => (
                     <CarouselItem key={event.id} className="basis-1/1">
                         <Card>
                             <CardHeader>
