@@ -5,6 +5,10 @@ import db from './db/models/index.js';
 import eventsRoutes from './routes/eventsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOptions from './swaggerOptions.js';
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +24,11 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.use('/api/events', eventsRoutes);
 app.use('/api/auth', authRoutes);
+
+if (process.env.NODE_ENV !== 'production') {
+    const specs = swaggerJsdoc(swaggerOptions);
+    app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+}
 
 app.use(errorHandler);
 
