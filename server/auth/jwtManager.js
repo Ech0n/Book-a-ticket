@@ -14,11 +14,11 @@ export const verify = (token, next) => {
   }
 };
 
-export const writeToCookie = (res, token) => {
+export const writeToCookie = (res, token, time = 3600000) => {
   res.cookie('token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 1000,
+    maxAge: time,
     sameSite: 'lax',
   });
 };

@@ -37,3 +37,9 @@ export const loginUser = async (req, res) => {
 
     res.status(200).json({ message: 'Logged in' });
 };
+
+
+export const logoutUser = async (req, res) => {
+    writeToCookie(res, '', 0);
+    res.status(200).json({ message: 'Logged out' });
+};
