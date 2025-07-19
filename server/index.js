@@ -8,6 +8,7 @@ import errorHandler from './middleware/errorHandler.js';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOptions from './swaggerOptions.js';
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
@@ -20,6 +21,7 @@ const __dirname = path.dirname(__filename);
 await db.sequelize.sync({ alter: true, logging: false });
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.use('/api/events', eventsRoutes);

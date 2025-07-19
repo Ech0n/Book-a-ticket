@@ -7,11 +7,7 @@ export const sign = (payload) => {
 };
 
 export const verify = (token, next) => {
-  try {
-    return jwt.verify(token, SECRET_KEY);
-  } catch (err) {
-    next();
-  }
+  return jwt.verify(token, SECRET_KEY);
 };
 
 export const writeToCookie = (res, token, time = 3600000) => {

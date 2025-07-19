@@ -1,6 +1,7 @@
 
 import express from 'express';
 import { registerUser, loginUser, logoutUser } from '../controllers/authController.js';
+import { protectedRoute } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -67,6 +68,18 @@ router.post('/register', registerUser);
  */
 router.post('/login', loginUser);
 
-router.post('/logout', logoutUser);
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: User logout
+ *     description: Logs out the user by clearing the authentication cookie.
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ *       401:
+ *         description: Not authorized
+ */
+router.post('/logout', protectedRoute, logoutUser );
 
 export default router;
