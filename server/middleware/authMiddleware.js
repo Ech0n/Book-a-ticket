@@ -1,6 +1,6 @@
 import { verify, getFromCookie } from '../auth/jwtManager.js';
 import { isUserExist } from '../queries/userQueries.js';
-import createError from "http-errors";
+import createError from 'http-errors';
 
 export const protectedRoute = async (req, res, next) => {
     const token = getFromCookie(req);

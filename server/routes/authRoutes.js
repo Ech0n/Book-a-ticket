@@ -1,15 +1,17 @@
-
 import express from 'express';
-import { registerUser, loginUser, logoutUser } from '../controllers/authController.js';
-import { protectedRoute } from "../middleware/authMiddleware.js";
+import {
+    registerUser,
+    loginUser,
+    logoutUser,
+} from '../controllers/authController.js';
+import { protectedRoute } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
-
 
 /**
  * @swagger
  * /api/auth/register:
-*   post:
+ *   post:
  *     summary: Register a new user
  *     description: Creates a new user account.
  *     requestBody:
@@ -80,6 +82,6 @@ router.post('/login', loginUser);
  *       401:
  *         description: Not authorized
  */
-router.post('/logout', protectedRoute, logoutUser );
+router.post('/logout', protectedRoute, logoutUser);
 
 export default router;

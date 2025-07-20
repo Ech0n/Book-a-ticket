@@ -1,4 +1,4 @@
-import { events, featuredEvents } from "../mockData.js"
+import { events, featuredEvents } from '../mockData.js';
 
 export const getAllEvents = (req, res) => {
     //TODO In future get events from model

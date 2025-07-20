@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { getAllEvents, getFeatured } from '../controllers/eventsController.js';
 

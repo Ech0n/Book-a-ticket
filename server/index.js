@@ -7,16 +7,14 @@ import authRoutes from './routes/authRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import swaggerOptions from './swaggerOptions.js';
+import swaggerOptions from './swagger.config.js';
 import cookieParser from 'cookie-parser';
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 await db.sequelize.sync({ alter: true, logging: false });
 
