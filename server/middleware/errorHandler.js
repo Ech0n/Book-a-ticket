@@ -4,5 +4,10 @@ export default (err, req, res, next) => {
     const status = err.statusCode || 500;
     const message = err.message || 'Something went wrong';
 
-    res.status(status).json({ message });
+    const responseBody = { message };
+    if (err.errors) {
+        responseBody.errors = err.errors;
+    }
+
+    res.status(status).json(responseBody);
 };

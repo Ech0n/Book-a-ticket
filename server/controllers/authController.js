@@ -1,10 +1,16 @@
 import { hash, compare } from '../auth/passwordManager.js';
 import { createNewUser, getUserByEmail } from '../queries/userQueries.js';
-import { sign, writeToCookie } from '../auth/jwtManager.js';
+import { sign, addToken, clearToken } from '../auth/jwtManager.js';
 import createError from 'http-errors';
+import { registerSchema } from '../schemas/registerSchema.js';
+import { loginSchema } from '../schemas/loginSchema.js';
+import { validateSchema } from '../middleware/validationMiddleware.js';
 
 export const registerUser = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password } = validateSchema(
+        req.body,
+        registerSchema,
+    );
 
     const passwordHash = await hash(password);
     await createNewUser({ firstName, lastName, email, passwordHash });
@@ -12,35 +18,27 @@ export const registerUser = async (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
 };
 
+const FAKE_PASSWORD_HASH =
+    '$2b$10$CjwKCAiA6L6fBhBCEiwAjwUxHkLVpLl8P0eBfK5zyqU5ZX6FZjKvW.';
+
 export const loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = validateSchema(req.body, loginSchema);
 
     const user = await getUserByEmail(email);
+    const hashToCompare = user ? user.passwordHash : FAKE_PASSWORD_HASH;
+    const passwordMatch = await compare(password, hashToCompare);
 
-    if (!user) {
-        // If no user is found with the given email,
-        // generate a random string for hashing to prevent timing attacks.
-        const randomNumber = Math.floor(Math.random() * 10 + 10);
-        const randomString = Math.random()
-            .toString(36)
-            .substring(2, randomNumber);
-        await hash(randomString);
-        throw createError.Unauthorized('Authentication failed');
-    }
-
-    const passwordMatch = await compare(password, user.passwordHash);
-
-    if (!passwordMatch) {
-        throw createError.Unauthorized('Authentication failed');
+    if (!user && !passwordMatch) {
+        throw createError(401, 'Authentication failed');
     }
 
     const token = sign({ email: user.email });
-    writeToCookie(res, token);
+    addToken(res, token);
 
     res.status(200).json({ message: 'Logged in' });
 };
 
 export const logoutUser = async (req, res) => {
-    writeToCookie(res, '', 0);
+    clearToken(res);
     res.status(200).json({ message: 'Logged out' });
 };

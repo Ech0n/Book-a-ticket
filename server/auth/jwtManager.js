@@ -10,7 +10,7 @@ export const verify = (token, next) => {
     return jwt.verify(token, SECRET_KEY);
 };
 
-export const writeToCookie = (res, token, time = 3600000) => {
+export const addToken = (res, token, time = 3600000) => {
     res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -19,6 +19,14 @@ export const writeToCookie = (res, token, time = 3600000) => {
     });
 };
 
-export const getFromCookie = (req) => {
+export const clearToken = (res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+    });
+};
+
+export const getToken = (req) => {
     return req.cookies?.token || null;
 };

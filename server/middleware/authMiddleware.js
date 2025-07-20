@@ -1,9 +1,9 @@
-import { verify, getFromCookie } from '../auth/jwtManager.js';
+import { verify, getToken } from '../auth/jwtManager.js';
 import { isUserExist } from '../queries/userQueries.js';
 import createError from 'http-errors';
 
 export const protectedRoute = async (req, res, next) => {
-    const token = getFromCookie(req);
+    const token = getToken(req);
     if (!token) {
         throw createError(401, 'Not authorized');
     }
