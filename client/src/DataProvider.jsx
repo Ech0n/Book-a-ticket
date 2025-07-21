@@ -27,10 +27,12 @@ export default class DataProvider extends React.Component {
                 throw new Error('Failed to fetch data');
             }
 
-            const [allEvents, featuredEvents] = await Promise.all([
+            const [allEvents, featuredEventsRaw] = await Promise.all([
                 allRes.json(),
                 featuredRes.json(),
             ]);
+
+            const featuredEvents = featuredEventsRaw.map(data => data["event"])
 
             this.setState({ allEvents, featuredEvents, loading: false });
         } catch (error) {

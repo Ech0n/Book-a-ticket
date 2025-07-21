@@ -1,11 +1,11 @@
-import { events, featuredEvents } from '../mockData.js';
+import { getAllEvents, getAllFeaturedEvents } from '../queries/eventQueries.js';
 
-export const getAllEvents = (req, res) => {
-    //TODO In future get events from model
+export const getEvents = async (req, res) => {
+    const events = await getAllEvents();
     res.json(events);
 };
 
-export const getFeatured = (req, res) => {
-    //TODO In future get events from model
-    res.json(featuredEvents);
+export const getFeatured = async (req, res) => {
+    const events = await getAllFeaturedEvents();
+    res.json(events);
 };
