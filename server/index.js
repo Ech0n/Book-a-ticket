@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-await db.sequelize.sync({ alter: true, logging: false });
+await db.sequelize.sync({ logging: false });
 
 app.use(express.json());
 app.use(cookieParser());

@@ -45,7 +45,9 @@ Object.keys(db).forEach((modelName) => {
     if (db[modelName].associate) {
         db[modelName].associate(db);
     }
+
 });
+await sequelize.query('PRAGMA foreign_keys = ON;');
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
