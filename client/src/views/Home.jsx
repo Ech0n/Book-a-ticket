@@ -1,6 +1,5 @@
 import Featured from "../components/featured";
-import { Skeleton } from "@/components/ui/Skeleton"
-import { Separator } from "@/components/ui/Separator"
+import { Separator } from "@/components/ui/separator"
 import EventList from "../components/eventList";
 import Upcoming from "../components/upcoming";
 import { Link } from "react-router-dom";

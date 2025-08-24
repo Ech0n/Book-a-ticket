@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay"
 import DataProvider, { DataContext } from '../DataProvider';
 import React, { useContext } from 'react';
-import { Skeleton } from "@/components/ui/Skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 function Featured() {

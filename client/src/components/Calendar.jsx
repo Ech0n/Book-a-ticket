@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useState } from 'react';
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
-import { Skeleton } from "@/components/ui/Skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const locales = {
     'en-US': enUS,

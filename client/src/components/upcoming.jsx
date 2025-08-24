@@ -4,7 +4,7 @@ import { format, isToday, isTomorrow, parseISO, differenceInCalendarDays } from 
 import { enUS } from "date-fns/locale";
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
-import { Skeleton } from "@/components/ui/Skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 //TODO: Limit to 3 items total not 3 groups because this can brake layout
 export default function Upcoming({ maxItems }) {

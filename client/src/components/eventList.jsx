@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
-import { Skeleton } from "@/components/ui/Skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 function EventList() {
     const { allEvents, loading, error } = useContext(DataContext);
