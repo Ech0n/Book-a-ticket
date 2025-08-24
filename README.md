@@ -14,4 +14,4 @@
 
 2. Seed table contents for development purposes:  
 `cd server`  
-`npx sequelize-cli --config ./db/config/config.json db:seed:all`  
+`npx sequelize-cli --config ./db/config/config.json --seeders-path ./db/seeders db:seed:all`  
