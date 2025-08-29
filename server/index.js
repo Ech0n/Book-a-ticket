@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import db from './db/models/index.js';
 import eventsRoutes from './routes/eventsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import participationsRoutes from './routes/participationsRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.use('/api/events', eventsRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/participations', participationsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {
     const specs = swaggerJsdoc(swaggerOptions);

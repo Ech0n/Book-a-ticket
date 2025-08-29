@@ -18,7 +18,7 @@ router.get('/', getEvents);
 
 /**
  * @swagger
- * /api/events:
+ * /api/featured:
  *   get:
  *     summary: Get featured events
  *     description: Get list of all featured events
