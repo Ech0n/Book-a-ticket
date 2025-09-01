@@ -1,5 +1,5 @@
 import express from 'express';
-import { getEvents, getFeatured } from '../controllers/eventsController.js';
+import { getEvents, addEvent, getFeatured } from '../controllers/eventsController.js';
 
 const router = express.Router();
 
@@ -15,6 +15,43 @@ const router = express.Router();
  *         description: Success
  */
 router.get('/', getEvents);
+
+/**
+ * @swagger
+ * /api/events:
+ *   post:
+ *     summary: Add an event
+ *     description: Create a new event
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               subtitle:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *                 format: date
+ *               time:
+ *                 type: string
+ *                 format: time
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *               endTime:
+ *                 type: string
+ *                 format: time
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+router.post('/', addEvent);
 
 /**
  * @swagger
