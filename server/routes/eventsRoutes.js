@@ -1,8 +1,7 @@
 import express from 'express';
-import { getEvents, addEvent, getFeatured } from '../controllers/eventsController.js';
+import { handleGetAllEvents, handleGetFeatured, handleGetEvent, handleAddEvent } from '../controllers/eventsController.js';
 
 const router = express.Router();
-
 
 /**
  * @swagger
@@ -14,7 +13,7 @@ const router = express.Router();
  *       200:
  *         description: Success
  */
-router.get('/', getEvents);
+router.get('/', handleGetAllEvents);
 
 /**
  * @swagger
@@ -51,11 +50,11 @@ router.get('/', getEvents);
  *       200:
  *         description: Success
  */
-router.post('/', addEvent);
+router.post('/', handleAddEvent);
 
 /**
  * @swagger
- * /api/featured:
+ * /api/events/featured:
  *   get:
  *     summary: Get featured events
  *     description: Get list of all featured events
@@ -63,6 +62,27 @@ router.post('/', addEvent);
  *       200:
  *         description: Success
  */
-router.get('/featured', getFeatured);
+router.get('/featured', handleGetFeatured);
+
+/**
+ * @swagger
+ * /api/events/{id}:
+ *   get:
+ *     summary: Get event by ID
+ *     description: Get a specific event by its ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The event ID
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Event not found
+ */
+router.get('/:id', handleGetEvent);
 
 export default router;

@@ -30,7 +30,7 @@ function EventList() {
     }
 
     if (error) {
-        return <div className="text-red-500">Error loading events.</div>;
+        return <div className="text-red-500">Error loading events.<p> {error}</p></div>;
     }
 
     return (

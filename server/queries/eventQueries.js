@@ -20,7 +20,17 @@ export const addEventQuery = async (name, subtitle, date, time, endDate, endTime
 
 export const getAllFeaturedEvents = async () => {
     const featured = await db.FeaturedEvent.findAll({
-        include: [{ model: db.Event, as: 'event' }],
+        include: [{
+            model: db.Event,
+            as: 'event',
+            required: true
+        }],
     });
     return featured;
+};
+
+
+export const getEventById = async (eventId) => {
+    const event = await db.Event.findByPk(eventId);
+    return event;
 };
