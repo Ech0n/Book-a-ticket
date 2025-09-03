@@ -40,6 +40,23 @@ export default class DataProvider extends React.Component {
         }
     }
 
+    async fetchEventById(eventId) {
+        // TODO CHECK ID DATA ABOUT EVENT IS LOADED ALREADY IF IT IS NOT LOAD IT THAN
+        this.setState({ loading: true, error: null });
+        try {
+            const res = await fetch(`/api/events/${eventId}`);
+            if (!res.ok) {
+                throw new Error('Failed to fetch event');
+            }
+            const event = await res.json();
+            this.setState({ loading: false });
+            return event;
+        } catch (error) {
+            this.setState({ error: error.message, loading: false });
+            return null;
+        }
+    }
+
     render() {
         const { children } = this.props;
         return (
