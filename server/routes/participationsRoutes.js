@@ -5,17 +5,17 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/participations:
+ * /api/participations/{userId}:
  *   get:
  *     summary: Get all participations for a user
  *     description: Retrieve a list of all events a user is participating in
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: userId
  *         required: true
  *         description: ID of the user
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: Success
