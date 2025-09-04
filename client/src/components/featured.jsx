@@ -53,7 +53,7 @@ function Featured() {
                             </CardContent>
                             <CardFooter>
                                 <Button asChild>
-                                    <Link href={`/events/${event.id}`}>View Details</Link>
+                                    <Link to={`/events/${event.id}`}>View Details</Link>
                                 </Button>
                             </CardFooter>
                         </Card>
