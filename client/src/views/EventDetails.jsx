@@ -4,7 +4,7 @@ import { DataContext } from '../DataProvider';
 import { Button } from "@/components/ui/button"
 
 function EventDetails() {
-    const { allEvents, loading, error } = useContext(DataContext);
+    const { allEvents, user, loading, error } = useContext(DataContext);
     const { id } = useParams();
     console.log("Event Details for id:", id);
 
@@ -15,7 +15,7 @@ function EventDetails() {
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-8">
                 {event ? (
                     <>
-                        <h1 className="text-6xl font-bold mb-2">{event.name}</h1>
+                        <h1 className="text-6xl font-bold mb-2">{event.name} {user?.firstName} </h1>
                         {event.subtitle && (
                             <h2 className="text-lg text-muted-foreground mb-4">{event.subtitle}</h2>
                         )}

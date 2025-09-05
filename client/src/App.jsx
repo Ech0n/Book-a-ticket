@@ -7,14 +7,15 @@ import Navbar from './components/navbar';
 import EventsCalendar from './views/EventsCalendar';
 import EventsUpcoming from './views/EventsUpcoming';
 import DataProvider from './DataProvider';
+import Login from './views/Login';
 
 
 
 function App() {
   return (
     <div>
-      <Navbar />
       <DataProvider>
+      <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/calendar" element={<EventsCalendar />} />
           <Route path="/upcoming" element={<EventsUpcoming />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </DataProvider>
     </div>

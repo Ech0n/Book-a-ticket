@@ -8,10 +8,32 @@ export default class DataProvider extends React.Component {
         featuredEvents: [],
         loading: true,
         error: null,
+        user: null,
     };
 
     componentDidMount() {
         this.fetchData();
+        this.fetchUser();
+    }
+
+    async fetchUser() {
+        this.setState({ loading: true, error: null });
+
+        try {
+            const res = await fetch('/api/users/me', {
+                credentials: 'include' });
+            if (res.status === 401) {
+                this.setState({ user: null, loading: false });
+                return;
+            }
+            if (!res.ok) {
+                throw new Error('Failed to fetch user');
+            }
+            const user = await res.json();
+            this.setState({ user, loading: false });
+        } catch (error) {
+            this.setState({ error: error.message, loading: false });
+        }
     }
 
     async fetchData() {
@@ -60,7 +82,7 @@ export default class DataProvider extends React.Component {
     render() {
         const { children } = this.props;
         return (
-            <DataContext.Provider value={this.state}>
+            <DataContext.Provider value={{ ...this.state, setUser: (user) => this.setState({ user }) }}>
                 {children}
             </DataContext.Provider>
         );

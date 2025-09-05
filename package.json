@@ -15,6 +15,7 @@
     "concurrently": "^9.2.0"
   },
   "dependencies": {
+    "@radix-ui/react-form": "^0.1.8",
     "dotenv": "^17.2.2"
   }
 }
