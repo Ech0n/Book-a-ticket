@@ -12,6 +12,7 @@ import Autoplay from "embla-carousel-autoplay"
 import DataProvider, { DataContext } from '../DataProvider';
 import React, { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
+import EventCard from "./eventCard";
 
 
 function Featured() {
@@ -40,23 +41,7 @@ function Featured() {
             <CarouselContent>
                 {featuredEvents.map((event) => (
                     <CarouselItem key={event.id} className="basis-1/1">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>{event.name}</CardTitle>
-                                {event.subtitle && <CardDescription>{event.subtitle}</CardDescription>}
-                                <div className="text-sm text-muted-foreground">
-                                    {event.date && <span>Kiedy: {event.date}</span>}
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <p>{event.description}</p>
-                            </CardContent>
-                            <CardFooter>
-                                <Button asChild>
-                                    <Link to={`/events/${event.id}`}>View Details</Link>
-                                </Button>
-                            </CardFooter>
-                        </Card>
+                        <EventCard event={event} isFeatured />
                     </CarouselItem>
                 ))}
             </CarouselContent>

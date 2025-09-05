@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
+import EventCard from "@/components/eventCard";
 import { Skeleton } from "@/components/ui/skeleton"
 
 function EventList() {
@@ -36,23 +34,7 @@ function EventList() {
         <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {paginatedEvents.map((event) => (
-                    <Card key={event.id}>
-                        <CardHeader>
-                            <CardTitle>{event.name}</CardTitle>
-                            {event.subtitle && <CardDescription>{event.subtitle}</CardDescription>}
-                            <div className="text-muted-foreground text-sm">
-                                {event.date && <span>Kiedy: {event.date}</span>}
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm">{event.description}</p>
-                        </CardContent>
-                        <CardFooter>
-                            <Button asChild>
-                                <Link to={`/events/${event.id}`}>View Details</Link>
-                            </Button>
-                        </CardFooter>
-                    </Card>
+                    <EventCard key={event.id} event={event} />
                 ))}
             </div>
             <Pagination>

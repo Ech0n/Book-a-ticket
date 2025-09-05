@@ -15,12 +15,11 @@ function App() {
   return (
     <div>
       <DataProvider>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/calendar" element={<EventsCalendar />} />
           <Route path="/upcoming" element={<EventsUpcoming />} />
           <Route path='/login' element={<Login />} />

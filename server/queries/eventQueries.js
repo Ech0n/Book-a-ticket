@@ -17,7 +17,6 @@ export const addEventQuery = async (name, subtitle, date, time, endDate, endTime
     }
 };
 
-
 export const getAllFeaturedEvents = async () => {
     const featured = await db.FeaturedEvent.findAll({
         include: [{

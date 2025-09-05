@@ -5,6 +5,7 @@ import { enUS } from "date-fns/locale";
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
+import EventCard from "./eventCard";
 
 //TODO: Limit to 3 items total not 3 groups because this can brake layout
 export default function Upcoming({ maxItems }) {
@@ -75,19 +76,7 @@ export default function Upcoming({ maxItems }) {
                         </div>
 
                         {group.map(ev => (
-                            <Card
-                                key={ev.id}
-                                className="rounded-2xl shadow-sm hover:shadow-md transition"
-                            >
-                                <CardContent className="p-4 space-y-2">
-                                    <h3 className="text-lg font-medium">{ev.name}</h3>
-                                    <p className="text-sm text-muted-foreground">{ev.subtitle}</p>
-                                    <p className="text-sm">{ev.description}</p>
-                                    <p className="text-sm font-medium text-blue-600">
-                                        {format(ev.dateObj, 'PPPpp')}
-                                    </p>
-                                </CardContent>
-                            </Card>
+                            <EventCard event={ev} key={ev.id} />
                         ))}
                     </div>
                 );
