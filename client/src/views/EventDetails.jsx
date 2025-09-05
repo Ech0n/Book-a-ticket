@@ -2,11 +2,14 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from '../DataProvider';
 import { Button } from "@/components/ui/button"
+import useUser from "../hooks/useUser";
 
 function EventDetails() {
     const { allEvents, user, loading, error } = useContext(DataContext);
     const { id } = useParams();
+    const {addEventToUser} = useUser();
     console.log("Event Details for id:", id);
+
 
     const event = allEvents.find(e => e.id === 2);
 
@@ -15,7 +18,7 @@ function EventDetails() {
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-8">
                 {event ? (
                     <>
-                        <h1 className="text-6xl font-bold mb-2">{event.name} {user?.firstName} </h1>
+                        <h1 className="text-6xl font-bold mb-2">{event.name} </h1>
                         {event.subtitle && (
                             <h2 className="text-lg text-muted-foreground mb-4">{event.subtitle}</h2>
                         )}
@@ -31,7 +34,7 @@ function EventDetails() {
                         )}
                         <Button
                             className="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
-                            onClick={() => alert("Ticket purchase not implemented yet.")}
+                            onClick={() => {addEventToUser(user.id, event.id).then(() => alert("Ticket purchased successfully!")).catch(() => alert("Failed to purchase ticket."))}}
                         >
                             Buy Ticket
                         </Button>
