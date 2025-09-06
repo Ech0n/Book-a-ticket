@@ -7,7 +7,7 @@ import { format, isToday, isTomorrow, parseISO, differenceInCalendarDays } from 
 import useUser from "../hooks/useUser";
 import { useContext, useEffect } from "react";
 import { DataContext } from "../DataProvider";
-
+import { Separator } from "@/components/ui/separator";
 function EventCard({ event, isFeatured = false }) {
     const { user } = useContext(DataContext);
     const { addEventToUser } = useUser();
@@ -71,10 +71,18 @@ function EventCard({ event, isFeatured = false }) {
                     <DialogDescription>
                         {event.subtitle}
                     </DialogDescription>
-                    <p>{event.description}</p>
+                    <p className="text-sm text-gray-500">Starts at:</p>
                     <p className="text-sm font-medium text-blue-600">
                         {format(parseISO(event.date), 'PPPpp')}
                     </p>
+                    <p className="text-sm text-gray-500">Ends at:</p>
+                    <p className="text-sm font-medium text-blue-600">
+                        {format(parseISO(event.endDate), 'PPPpp')}
+                    </p>
+                    <Separator></Separator>
+                    <p className="text-l mt-5">{event.description}</p>
+
+
                 </DialogHeader>
                 < DialogFooter className="flex flex-col sm:flex-col" >
                     <Button
