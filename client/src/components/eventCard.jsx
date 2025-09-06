@@ -4,8 +4,14 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger, D
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { useState } from "react";
 import { format, isToday, isTomorrow, parseISO, differenceInCalendarDays } from "date-fns";
+import useUser from "../hooks/useUser";
+import { useContext, useEffect } from "react";
+import { DataContext } from "../DataProvider";
 
 function EventCard({ event, isFeatured = false }) {
+    const { user } = useContext(DataContext);
+    const { addEventToUser } = useUser();
+
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const handleClick = (e) => {
         e.stopPropagation();
@@ -14,6 +20,28 @@ function EventCard({ event, isFeatured = false }) {
             console.log("Handling click")
         }
     }
+
+    const now = new Date();
+    const date_now = now.toISOString().split("T")[0];
+    const time_now = now.toTimeString().split(" ")[0];
+
+    let isButtonDisabled = false;
+    let disabledButtonMsg = "";
+
+    if (event) {
+        if (
+            event.endDate < date_now ||
+            (event.endDate === date_now && event.endTime < time_now)
+        ) {
+            isButtonDisabled = true;
+            disabledButtonMsg = "Event has ended";
+        }
+        else if (!user) {
+            isButtonDisabled = true;
+            disabledButtonMsg = "Please log in to buy tickets";
+        }
+    }
+
     return (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
@@ -42,14 +70,25 @@ function EventCard({ event, isFeatured = false }) {
                     <DialogTitle>{event.name}</DialogTitle>
                     <DialogDescription>
                         {event.subtitle}
-                        <p className="text-sm">{event.description}</p>
-                        <p className="text-sm font-medium text-blue-600">
-                            {format(parseISO(event.date), 'PPPpp')}
-                        </p>
                     </DialogDescription>
+                    <p>{event.description}</p>
+                    <p className="text-sm font-medium text-blue-600">
+                        {format(parseISO(event.date), 'PPPpp')}
+                    </p>
                 </DialogHeader>
-                < DialogFooter >
-                    <Button onClick={() => alert("IMPLEMENT TICKET BUYING HERE")}>BOOK A TICKET</Button>
+                < DialogFooter className="flex flex-col sm:flex-col" >
+                    <Button
+                        disabled={isButtonDisabled}
+                        className="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
+                        onClick={() => {
+                            addEventToUser(user.id, event.id)
+                                .then(() => alert("Ticket purchased successfully!"))
+                                .catch(() => alert("Failed to purchase ticket."));
+                        }}
+                    >
+                        Book a Ticket
+                    </Button>
+                    <p className="text-sm text-muted-foreground text-center">{disabledButtonMsg}</p>
                 </DialogFooter>
             </DialogContent >
         </Dialog >
