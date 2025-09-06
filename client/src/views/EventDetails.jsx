@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import useUser from "../hooks/useUser";
 
 function EventDetails() {
-  const { allEvents, user, loading, error } = useContext(DataContext);
+  const { allEvents, user, loading, error, userEvents } =
+    useContext(DataContext);
   const { id } = useParams();
   const { addEventToUser } = useUser();
 
@@ -24,10 +25,9 @@ function EventDetails() {
     ) {
       isButtonDisabled = true;
       disabledButtonMsg = "Event has ended";
-    } 
-    else if (!user){
-        isButtonDisabled = true;
-        disabledButtonMsg = "Please log in to buy tickets";
+    } else if (!user) {
+      isButtonDisabled = true;
+      disabledButtonMsg = "Please log in to buy tickets";
     }
   }
 
@@ -43,7 +43,7 @@ function EventDetails() {
               </h2>
             )}
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-              <span>{event.date}</span>
+              <span>{event.id}</span>
               <span>{event.time}</span>
               <span>-</span>
               <span>{event.endDate}</span>
@@ -52,18 +52,20 @@ function EventDetails() {
             {event.description && (
               <p className="text-base leading-relaxed">{event.description}</p>
             )}
+            { userEvents.some((e) => e.id === event.id) ? <Button>Return ticket</Button> : (
+              <Button
+                disabled={isButtonDisabled}
+                className="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
+                onClick={() => {
+                  addEventToUser(user.id, event.id)
+                    .then(() => alert("Ticket purchased successfully!"))
+                    .catch(() => alert("Failed to purchase ticket."));
+                }}
+              >
+                Buy Ticket
+              </Button>
+            )}
 
-            <Button
-              disabled={isButtonDisabled}
-              className="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
-              onClick={() => {
-                addEventToUser(user.id, event.id)
-                  .then(() => alert("Ticket purchased successfully!"))
-                  .catch(() => alert("Failed to purchase ticket."));
-              }}
-            >
-              Buy Ticket
-            </Button>
             <p className="text-sm text-muted-foreground">{disabledButtonMsg}</p>
           </>
         ) : (

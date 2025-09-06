@@ -8,6 +8,7 @@ import EventsCalendar from './views/EventsCalendar';
 import EventsUpcoming from './views/EventsUpcoming';
 import DataProvider from './DataProvider';
 import Login from './views/Login';
+import Profile from './views/Profile';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/calendar" element={<EventsCalendar />} />
           <Route path="/upcoming" element={<EventsUpcoming />} />
           <Route path='/login' element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </DataProvider>
     </div>

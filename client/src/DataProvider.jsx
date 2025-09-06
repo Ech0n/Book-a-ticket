@@ -1,5 +1,4 @@
-import React, { createContext } from "react";
-
+import React, { createContext} from "react";
 export const DataContext = createContext();
 
 export default class DataProvider extends React.Component {
@@ -17,6 +16,16 @@ export default class DataProvider extends React.Component {
     this.fetchUser();
   }
 
+
+  async getEventsByUser(userId){
+    const res = await fetch(`/api/participations/${userId}`);
+    if (res.ok){
+      const data = await res.json();
+      console.log(data);
+      this.setState({ userEvents: data });
+    }
+  }
+
   async fetchUser() {
     this.setState({ loading: true, error: null });
 
@@ -32,7 +41,7 @@ export default class DataProvider extends React.Component {
         throw new Error("Failed to fetch user");
       }
       const user = await res.json();
-      console.log(user);
+      await this.getEventsByUser(user.id);
       this.setState({ user, loading: false });
     } catch (error) {
       this.setState({ error: error.message, loading: false });
@@ -91,6 +100,7 @@ export default class DataProvider extends React.Component {
           setUser: (user) => this.setState({ user }),
           fetchUser: () => this.fetchUser(),
           setUserEvents: (events) => this.setState({ userEvents: events }),
+          getEventsByUser: (userId) => this.getEventsByUser(userId),
         }}
       >
         {children}
