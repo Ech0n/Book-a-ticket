@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import useUser from "../hooks/useUser";
 import { DataContext } from "../DataProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 export default function Login() {
   const navigate = useNavigate();
   const { user } = useContext(DataContext);
-  
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) navigate("/");
+    if (user) navigate(from);
   }, [user]);
 
   const { login } = useUser();
@@ -22,7 +24,7 @@ export default function Login() {
       password: e.target[1].value,
     }).then((res) => {
       if (res === 1) {
-        navigate("/");
+        navigate(from, { replace: true });
       } else {
         alert("Login failed");
       }
@@ -51,12 +53,12 @@ export default function Login() {
           className="border border-gray-300 p-2 rounded-md w-full"
         />
       </div>
-      <button
+      <Button
         type="submit"
-        className="bg-blue-500 text-white py-2 px-4 rounded-md"
+        className=" text-white py-2 px-4 rounded-md cursor-pointer"
       >
         Login
-      </button>
+      </Button>
     </form>
   );
 }
