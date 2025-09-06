@@ -90,16 +90,28 @@ export default function Navbar() {
             <span className="text-gray-700">{user.firstName}</span>
           </Link>
         ) : (
-          <Button
-            className="cursor-pointer"
-            onClick={() =>
-              navigate("/login", {
-                state: { from: location },
-              })
-            }
-          >
-            Login
-          </Button>
+          <>
+            <Button
+              className="cursor-pointer"
+              onClick={() =>
+                navigate("/login", {
+                  state: { from: location },
+                })
+              }
+            >
+              Login
+            </Button>
+            <Button
+              className="cursor-pointer"
+              onClick={() =>
+                navigate("/register", {
+                  state: { from: location },
+                })
+              }
+            >
+              Register
+            </Button>
+          </>
         )}
       </div>
     </nav>
