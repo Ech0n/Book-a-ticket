@@ -26,3 +26,15 @@ export const addParticipationQuery = async (userId, eventId) => {
         throw new Error('Database error');
     }
 };
+
+export const removeParticipationQuery = async (userId, eventId) => {
+    try {
+        const result = await db.Participation.destroy({
+            where: { userId, eventId }
+        });
+        return result > 0;
+    } catch (error) {
+        console.error('Error removing participation:', error);
+        throw new Error('Database error');
+    }
+}

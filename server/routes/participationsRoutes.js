@@ -1,5 +1,5 @@
 import express from 'express';
-import { addParticipation, getEventsByUser } from '../controllers/participationController.js';
+import { addParticipation, getEventsByUser, removeParticipation } from '../controllers/participationController.js';
 
 const router = express.Router();
 
@@ -45,5 +45,28 @@ router.get('/:userId', getEventsByUser);
  *         description: Success
  */
 router.post('/', addParticipation);
+
+/**
+ * @swagger
+ * /api/participations:
+ *   delete:
+ *     summary: Remove a participation
+ *     description: Cancel a user's reservation in an event
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *               eventId:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+router.delete('/', removeParticipation);
 
 export default router;
