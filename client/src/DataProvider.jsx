@@ -21,7 +21,6 @@ export default class DataProvider extends React.Component {
     const res = await fetch(`/api/participations/${userId}`);
     if (res.ok){
       const data = await res.json();
-      console.log(data);
       this.setState({ userEvents: data });
     }
   }

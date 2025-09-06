@@ -1,21 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DataContext } from "../DataProvider";
 import { useNavigate } from "react-router-dom";
+import EventCard from "../components/eventCard";
+import { Button } from "@/components/ui/button";
+import useUser from "../hooks/useUser";
 
 //TODO profile of user with list of events he is going to
 export default function Profile() {
-  const { user, userEvents } = useContext(DataContext);
+  const { user, userEvents, loading } = useContext(DataContext);
   const navigate = useNavigate();
-  if(!user){
-    navigate("/login");
-  }
+  const { logout } = useUser();
+  useEffect(() => {
+    if (!user && !loading) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
   return (
-    <div>
-      <h1>{user?.firstName}'s Profile</h1>
-      <h2>Your Events</h2>
-      <ul>
+    <div className="container mx-auto p-4 min-h-screen ">
+      <h1 className="text-2xl font-bold">{user?.firstName}'s profile</h1>
+      <h2 className="text-lg font-semibold">Email: {user?.email}</h2>
+      <h2 className="text-lg font-semibold">
+        Name: {user?.firstName} {user?.lastName}
+      </h2>
+      <Button className="mt-4 cursor-pointer" onClick={logout}>Logout</Button>
+      <h2 className="text-xl font-semibold py-4">Your Events</h2>
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {userEvents.map((event) => (
-          <li key={event.id}>{event.name}</li>
+          <li key={event.id}>
+            <EventCard event={event} />
+          </li>
         ))}
       </ul>
     </div>

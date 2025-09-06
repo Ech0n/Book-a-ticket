@@ -54,6 +54,7 @@ export default function useUser() {
   const logout = async () => {
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     setUser(null);
+    setUserEvents([]);
   };
 
   return { login, logout, addEventToUser, removeEventFromUser };
