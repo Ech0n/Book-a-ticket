@@ -9,6 +9,7 @@ export default function Login() {
   const { user } = useContext(DataContext);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const [error, setError] = React.useState(null);
 
   useEffect(() => {
     if (user) navigate(from);
@@ -24,9 +25,10 @@ export default function Login() {
       password: e.target[1].value,
     }).then((res) => {
       if (res === 1) {
+        setError(null);
         navigate(from, { replace: true });
       } else {
-        alert("Login failed");
+        setError("Incorrect email or password");
       }
     });
   };
@@ -59,6 +61,7 @@ export default function Login() {
       >
         Login
       </Button>
+      {error && <p className="text-red-500 mt-4">{error}</p>}
     </form>
   );
 }

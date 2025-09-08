@@ -31,6 +31,7 @@ import { Separator } from "@/components/ui/separator";
 function EventCard({ event, isFeatured = false }) {
   const { user, userEvents } = useContext(DataContext);
   const { addEventToUser, removeEventFromUser } = useUser();
+  const [confirmAction, setConfirmAction] = useState(null);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const handleClick = (e) => {
@@ -40,6 +41,24 @@ function EventCard({ event, isFeatured = false }) {
       console.log("Handling click");
     }
   };
+
+  const handleConfirm = async () => {
+    try{
+      if( confirmAction == 'buy'){
+        await addEventToUser(user.id, event.id);
+        alert("Ticket purchased successfully!");
+      } else if (confirmAction == 'return'){
+        await removeEventFromUser(user.id, event.id);
+        alert("Ticket returned successfully!");
+      }
+    }
+    catch(err){
+      alert(`Action failed. ${err}`);
+    }
+    finally{
+      setConfirmAction(null);
+    }
+  }
 
   const now = new Date();
   const date_now = now.toISOString().split("T")[0];
@@ -118,12 +137,8 @@ function EventCard({ event, isFeatured = false }) {
         <DialogFooter className="flex flex-col sm:flex-col">
           {userEvents.some((e) => e.id === event.id) ? (
             <Button
-            disabled={isButtonDisabled}
-              onClick={() => {
-                removeEventFromUser(user.id, event.id)
-                  .then(() => alert("Ticket returned successfully!"))
-                  .catch((err) => alert(`Failed to return ticket. ${err}`));
-              }}
+              disabled={isButtonDisabled}
+              onClick={() => setConfirmAction("return")}
               className="mt-6 px-6 py-3 cursor-pointer bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
             >
               Return ticket
@@ -132,11 +147,7 @@ function EventCard({ event, isFeatured = false }) {
             <Button
               disabled={isButtonDisabled}
               className="mt-6 px-6 py-3 cursor-pointer bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
-              onClick={() => {
-                addEventToUser(user.id, event.id)
-                  .then(() => alert("Ticket purchased successfully!"))
-                  .catch((err) => alert(`Failed to purchase ticket. ${err}`));
-              }}
+              onClick={() => setConfirmAction("buy")}
             >
               Buy Ticket
             </Button>
@@ -146,6 +157,33 @@ function EventCard({ event, isFeatured = false }) {
           </p>
         </DialogFooter>
       </DialogContent>
+      {confirmAction && (
+        <Dialog open={true} onOpenChange={() => setConfirmAction(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                {confirmAction === "buy"
+                  ? "Confirm Ticket Purchase"
+                  : "Confirm Ticket Return"}
+              </DialogTitle>
+              <DialogDescription>
+                {confirmAction === "buy"
+                  ? "Are you sure you want to buy a ticket for this event?"
+                  : "Are you sure you want to return your ticket for this event?"}
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="flex justify-end gap-4">
+              <Button
+                variant="outline"
+                onClick={() => setConfirmAction(null)}
+              >
+                Cancel
+              </Button>
+              <Button onClick={handleConfirm}>Confirm</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </Dialog>
   );
 }
