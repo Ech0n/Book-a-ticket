@@ -7,6 +7,7 @@
 2. [Uruchamianie](#uruchamianie)
 3. [Użyte technologie](#użyte-technologie)
 4. [Architektura](#architektura)
+4. [Organizacja Pracy](#organizacja-pracy)
 
 
 ## Wymagania
@@ -59,3 +60,9 @@ Dostępne endpointy serwera wylistowane są przez swaggera po uruchomieniu build
 Widok aplikacji został wykonany w react. Użyliśmy komponentów shadcn, a własne komponenty wystylizowaliśmy za pomocą tailwind.
 
 Plik wejściowy aplikacji to App.jsx. Komponent App posiada Router zawierający wszystkie Routy dostępne w aplikacji. Router o wrappowany jest w nasz komponent DataProvider odpowiedzialny za z fetchowanie danych z serwera i udostępnienie ich wszystkim komponentą dziecią za pomocą reactowego Context'u.
+
+## Organizacja pracy
+
+Głównym narzędziem organizującym naszą prace był Discord.
+Każdy członek zespołu przypisał sobie zadania dostępne z listy wcześniej ustalonych zadań.
+Dodatkowo prace ułatwiały dobre i przejrzyste git commit message na podstawie, których można było odczytać co już zostało zrobione.
