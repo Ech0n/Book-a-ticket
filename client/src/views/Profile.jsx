@@ -5,7 +5,6 @@ import EventCard from "../components/eventCard";
 import { Button } from "@/components/ui/button";
 import useUser from "../hooks/useUser";
 
-//TODO profile of user with list of events he is going to
 export default function Profile() {
   const { user, userEvents, loading } = useContext(DataContext);
   const navigate = useNavigate();
@@ -23,14 +22,20 @@ export default function Profile() {
         Name: {user?.firstName} {user?.lastName}
       </h2>
       <Button className="mt-4 cursor-pointer" onClick={logout}>Logout</Button>
-      <h2 className="text-xl font-semibold py-4">Your Events</h2>
-      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {userEvents.map((event) => (
-          <li key={event.id}>
-            <EventCard event={event} />
-          </li>
-        ))}
-      </ul>
+      { !userEvents.length ? (
+        <h2 className="text-xl font-semibold py-4">You haven't booked any tickets</h2>
+      ) : (
+        <>
+          <h2 className="text-xl font-semibold py-4">Your Events</h2>
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {userEvents.map((event) => (
+              <li key={event.id}>
+                <EventCard event={event} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
