@@ -1,5 +1,5 @@
 import createError from 'http-errors';
-import db from '../db/models/index.js';
+import db from '../models/index.js';
 
 export const getAllEvents = async () => {
     const events = await db.Event.findAll();

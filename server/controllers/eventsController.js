@@ -1,4 +1,4 @@
-import { getAllEvents, getAllFeaturedEvents, getEventById, addEventQuery } from '../queries/eventQueries.js';
+import { getAllEvents, getAllFeaturedEvents, getEventById, addEventQuery } from '../db/queries/eventQueries.js';
 
 export const handleGetAllEvents = async (req, res) => {
     const events = await getAllEvents();

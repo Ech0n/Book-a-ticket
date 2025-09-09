@@ -1,5 +1,5 @@
 import { hash, compare } from '../auth/passwordManager.js';
-import { createNewUser, getUserByEmail } from '../queries/userQueries.js';
+import { createNewUser, getUserByEmail } from '../db/queries/userQueries.js';
 import { sign, addToken, clearToken } from '../auth/jwtManager.js';
 import createError from 'http-errors';
 import { registerSchema } from '../schemas/registerSchema.js';

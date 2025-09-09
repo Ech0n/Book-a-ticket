@@ -1,4 +1,4 @@
-import { addParticipationQuery, getEventsByUserQuery, removeParticipationQuery } from '../queries/participationQueries.js';
+import { addParticipationQuery, getEventsByUserQuery, removeParticipationQuery } from '../db/queries/participationQueries.js';
 
 export const getEventsByUser = async (req, res) => {
     const userId = req.params.userId;
@@ -9,7 +9,7 @@ export const getEventsByUser = async (req, res) => {
 export const addParticipation = async (req, res) => {
     const { userId, eventId } = req.body;
     const participation = await addParticipationQuery(userId, eventId);
-    if(participation){
+    if (participation) {
         res.status(201).json(participation);
     } else {
         res.status(400).json({ error: 'Could not add participation' });

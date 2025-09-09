@@ -1,5 +1,5 @@
 import { verify, getToken } from '../auth/jwtManager.js';
-import { isUserExist } from '../queries/userQueries.js';
+import { isUserExist } from '../db/queries/userQueries.js';
 import createError from 'http-errors';
 
 export const protectedRoute = async (req, res, next) => {

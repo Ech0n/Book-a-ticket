@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import db from '../db/models/index.js';
+import db from '../models/index.js';
 
 export const getEventsByUserQuery = async (userId) => {
     const participations = await db.Participation.findAll({
