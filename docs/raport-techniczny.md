@@ -16,7 +16,9 @@
 
 ## Uruchamianie
 
-`docker compose up`  
+```
+docker compose up
+```
 Strona powinna być dostępna na [localhost:3000](localhost:3000)
 
 ## Użyte technologie
@@ -37,7 +39,7 @@ Strona powinna być dostępna na [localhost:3000](localhost:3000)
 ## Architektura
 
 Projekt podzielony jast na dwa katalogi: server i client.
-W trakcie developmentu za pomocą przygotowanej komendy startowaliśmy osobno serwer kliencki i serwer backendowy, ale produkcyjny build uruchamiany na docker statycznie serwuje z buildowaną strone z katalogu client.
+W trakcie developmentu za pomocą przygotowanej komendy startowaliśmy osobno serwer kliencki i serwer backendowy, ale produkcyjny build uruchamiany na docker statycznie serwuje zbuildowaną strone z katalogu client.
 Cała aplikacja działa zgodnie ze schematem MVC
 
 **Server**:
