@@ -7,6 +7,10 @@ import { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 import EventCard from "./eventCard";
 
+function getTime(event) {
+    const dateObj = parseISO(`${event.date}T${event.time}`);
+    return dateObj
+}
 //TODO: Limit to 3 items total not 3 groups because this can brake layout
 export default function Upcoming({ maxItems }) {
     const { allEvents, loading, error } = useContext(DataContext);
@@ -14,32 +18,24 @@ export default function Upcoming({ maxItems }) {
     const now = new Date();
 
     const sortedEvents = [...allEvents]
-        .map(ev => {
-            const dateTimeStr = `${ev.date}T${ev.time}`;
-            return {
-                ...ev,
-                dateObj: parseISO(dateTimeStr)
-            };
-        })
-        .filter(ev => ev.dateObj >= now)
-        .sort((a, b) => a.dateObj - b.dateObj);
+        .filter(ev => getTime(ev) >= now)
+        .sort((a, b) => (getTime(a) - getTime(b)));
 
     const limitedEvents = maxItems ? sortedEvents.slice(0, maxItems) : sortedEvents;
-
     const grouped = {};
 
     for (const ev of limitedEvents) {
-        const daysDiff = differenceInCalendarDays(ev.dateObj, now);
+        const daysDiff = differenceInCalendarDays(getTime(ev), now);
         let groupLabel;
 
-        if (isToday(ev.dateObj)) {
+        if (isToday(getTime(ev))) {
             groupLabel = "Today";
-        } else if (isTomorrow(ev.dateObj)) {
+        } else if (isTomorrow(getTime(ev))) {
             groupLabel = "Tomorrow";
         } else if (daysDiff <= 6) {
-            groupLabel = format(ev.dateObj, "EEEE", { locale: enUS });
+            groupLabel = format(getTime(ev), "EEEE", { locale: enUS });
         } else {
-            groupLabel = format(ev.dateObj, "EEEE do MMMM", { locale: enUS });
+            groupLabel = format(getTime(ev), "EEEE do MMMM", { locale: enUS });
         }
 
         if (!grouped[groupLabel]) {
@@ -67,20 +63,24 @@ export default function Upcoming({ maxItems }) {
 
 
     return (
-        < >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {Object.entries(grouped).map(([label, group]) => {
-                return (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4" key={label}>
-                        <div className="col-span-full">
-                            <h2 className="text-xl font-semibold my-2">{label}</h2>
-                        </div>
+                const groupSize = group.length;
 
-                        {group.map(ev => (
-                            <EventCard event={ev} key={ev.id} />
-                        ))}
+                return (
+                    <div className={"flex flex-col gap-2 col-span-" + groupSize + " md:col-span-" + groupSize} key={label}>
+                        <h2 className="text-xl font-semibold my-2">{label}</h2>
+                        <div className={"grid gap-2 md:grid-cols-" + groupSize + " grid-cols-" + groupSize}>
+                            {group.map(ev => (
+                                <div key={ev.id} className={"w-1/" + groupSize}>
+
+                                    <EventCard event={ev} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                );
+                )
             })}
-        </>
+        </div >
     );
 }

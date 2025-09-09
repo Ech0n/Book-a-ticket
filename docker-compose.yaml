@@ -1,0 +1,8 @@
+services:
+  book-a-ticket:
+    build:
+      context: .
+    image: book-a-ticket
+    ports:
+      - "3000:3000"
+    restart: "no"

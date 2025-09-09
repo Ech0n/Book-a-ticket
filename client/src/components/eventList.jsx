@@ -4,12 +4,14 @@ import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
 import EventCard from "@/components/eventCard";
 import { Skeleton } from "@/components/ui/skeleton"
+import { parse } from "date-fns";
 
-function EventList() {
+function EventList({ rows = "2" }) {
     const { allEvents, loading, error } = useContext(DataContext);
 
     const PAGE_NUMBERS_TO_SHOW = 5;
-    const ITEMS_PER_PAGE = 6;
+    rows = parseInt(rows);
+    const ITEMS_PER_PAGE = rows * 3;
     const [page, setPage] = useState(1);
 
     const totalPages = Math.ceil(allEvents.length / ITEMS_PER_PAGE);

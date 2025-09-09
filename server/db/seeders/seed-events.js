@@ -1,7 +1,7 @@
 // db/migrations/20250819-demo-event-seeder.js
 export default {
     async up(queryInterface, Sequelize) {
-        await queryInterface.bulkInsert('Events', [
+        queryInterface.bulkInsert('Events', [
             {
                 name: 'Tech Conference 2025',
                 subtitle: 'AI & Future',
@@ -10,6 +10,50 @@ export default {
                 endDate: '2025-09-10',
                 endTime: '18:00:00',
                 description: 'A conference about the future of AI and technology innovations.',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Cracow Museum Night',
+                subtitle: 'Culture & History',
+                date: '2025-09-11',
+                time: '10:00:00',
+                endDate: '2025-09-10',
+                endTime: '18:00:00',
+                description: 'Explore the rich history and culture of Cracow with special exhibits and tours.',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Emerging Tech Expo',
+                subtitle: 'AI & Future',
+                date: '2025-09-11',
+                time: '10:00:00',
+                endDate: '2025-09-10',
+                endTime: '18:00:00',
+                description: 'Explore the latest breakthroughs in technology and AI applications.',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Summer Soundwave',
+                subtitle: 'Summer Beats',
+                date: '2025-09-12',
+                time: '15:00:00',
+                endDate: '2025-08-22',
+                endTime: '23:59:00',
+                description: 'Experience three days of live music, sunshine, and unforgettable performances.',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                name: 'Design Forward',
+                subtitle: 'Creative Minds',
+                date: '2025-09-13',
+                time: '09:00:00',
+                endDate: '2025-10-05',
+                endTime: '17:00:00',
+                description: 'A showcase of cutting-edge art and design from around the world.',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

@@ -1,4 +1,4 @@
-import React, { createContext} from "react";
+import React, { createContext } from "react";
 export const DataContext = createContext();
 
 export default class DataProvider extends React.Component {
@@ -17,9 +17,9 @@ export default class DataProvider extends React.Component {
   }
 
 
-  async getEventsByUser(userId){
+  async getEventsByUser(userId) {
     const res = await fetch(`/api/participations/${userId}`);
-    if (res.ok){
+    if (res.ok) {
       const data = await res.json();
       this.setState({ userEvents: data });
     }
@@ -64,7 +64,6 @@ export default class DataProvider extends React.Component {
         allRes.json(),
         featuredRes.json(),
       ]);
-
       const featuredEvents = featuredEventsRaw.map((data) => data["event"]);
 
       this.setState({ allEvents, featuredEvents, loading: false });

@@ -12,11 +12,10 @@ export default {
                 updatedAt: new Date(),
             })
         });
-
-        queryInterface.bulkInsert('FeaturedEvents', featuredEvents, {});
+        await queryInterface.bulkInsert('FeaturedEvents', featuredEvents);
     },
 
     async down(queryInterface, Sequelize) {
-        queryInterface.bulkDelete('FeaturedEvents', null, {});
+        await queryInterface.bulkDelete('FeaturedEvents', null, {});
     },
 };
