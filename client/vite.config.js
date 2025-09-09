@@ -5,6 +5,11 @@ import path from "path"
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      treeshake: false,
+    },
+  },
   plugins: [react(), tailwindcss()],
   server: {
     watch: {
