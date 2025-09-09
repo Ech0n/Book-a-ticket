@@ -1,6 +1,13 @@
 # BOOK A TICKET
 
-## How to run:
+[technical raport](https://github.com/Ech0n/Book-a-ticket/blob/main/docs/raport-techniczny.md)
+[documentation](https://github.com/Ech0n/Book-a-ticket/blob/main/docs/dokumentacja-biznesowa.md)
+
+## How to run production server:
+`docker compose up`  
+server should be running on localhost:3000
+
+## How to run development server:
 
 1. Clone the repo
 2. `npm run install-all` - Install libraries
