@@ -64,23 +64,21 @@ export default function Upcoming({ maxItems }) {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {Object.entries(grouped).map(([label, group]) => {
-                const groupSize = group.length;
+            {Object.entries(grouped).map(([label, group]) =>
+                group.map((ev, idx) => (
+                    <div key={ev.id} className="flex flex-col gap-2">
+                        {/* Reserve space for label, even if empty */}
+                        {idx === 0 ? (
 
-                return (
-                    <div className={"flex flex-col gap-2 col-span-" + groupSize + " md:col-span-" + groupSize} key={label}>
-                        <h2 className="text-xl font-semibold my-2">{label}</h2>
-                        <div className={"grid gap-2 md:grid-cols-" + groupSize + " grid-cols-" + groupSize}>
-                            {group.map(ev => (
-                                <div key={ev.id} className={"w-1/" + groupSize}>
-
-                                    <EventCard event={ev} />
-                                </div>
-                            ))}
-                        </div>
+                            <h2 className="text-xl font-semibold h-[28px] my-2">{label}</h2>
+                        ) : (
+                            <div className="h-[32px] my-2"> </div>
+                        )
+                        }
+                        <EventCard event={ev} />
                     </div>
-                )
-            })}
-        </div >
+                ))
+            )}
+        </div>
     );
 }
