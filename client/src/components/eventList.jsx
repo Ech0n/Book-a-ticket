@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 function EventList() {
     const { allEvents, loading, error } = useContext(DataContext);
 
+    const PAGE_NUMBERS_TO_SHOW = 5;
     const ITEMS_PER_PAGE = 6;
     const [page, setPage] = useState(1);
 
@@ -32,7 +33,7 @@ function EventList() {
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
                 {paginatedEvents.map((event) => (
                     <EventCard key={event.id} event={event} />
                 ))}
@@ -45,7 +46,7 @@ function EventList() {
                             disabled={page === 1}
                         />
                     </PaginationItem>
-                    {[...Array(totalPages)].map((_, i) => (
+                    {[...Array(totalPages)].slice(0, PAGE_NUMBERS_TO_SHOW).map((_, i) => (
                         <PaginationItem key={i}>
                             <PaginationLink
                                 isActive={page === i + 1}

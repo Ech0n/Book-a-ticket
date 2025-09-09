@@ -67,10 +67,10 @@ export default function Upcoming({ maxItems }) {
 
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        < >
             {Object.entries(grouped).map(([label, group]) => {
                 return (
-                    <div key={label}>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4" key={label}>
                         <div className="col-span-full">
                             <h2 className="text-xl font-semibold my-2">{label}</h2>
                         </div>
@@ -81,6 +81,6 @@ export default function Upcoming({ maxItems }) {
                     </div>
                 );
             })}
-        </div>
+        </>
     );
 }
