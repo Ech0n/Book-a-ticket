@@ -8,6 +8,7 @@
 3. [Użyte technologie](#użyte-technologie)
 4. [Architektura](#architektura)
 4. [Organizacja Pracy](#organizacja-pracy)
+5. [Podsumowanie](#podsumowanie)
 
 
 ## Wymagania
