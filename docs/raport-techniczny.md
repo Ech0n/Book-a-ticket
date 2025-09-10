@@ -68,3 +68,7 @@ Plik wejściowy aplikacji to App.jsx. Komponent App posiada Router zawierający 
 Głównym narzędziem organizującym naszą prace był Discord.
 Każdy członek zespołu przypisał sobie zadania dostępne z listy wcześniej ustalonych zadań.
 Dodatkowo prace ułatwiały dobre i przejrzyste git commit message na podstawie, których można było odczytać co już zostało zrobione.
+
+## Podsumowanie
+
+Cel projektu został osiągnięty, ponieważ powstała aplikacja spełnia ustalone wymagania, czyli umożliwia zakup biletów przez prosty interfejs oraz zapoznanie się z wydarzeniami. Aplikacja zgodnie z założeniami jest skierowana do klientów. W celu rozbudowy projektu możliwe jest utworzenie aplikacji dla firm i instytucji, która umożliwiałaby łatwe zarządzanie dostępnymi wydarzeniami i sprzedażą biletów. Możliwa jest też rozbudowa o nowe funkcje, np. wyświetlanie wydarzeń posortowanych według ustalonych kryteriów lub na podstawie wybranych przez użytkownika kategorii, dzięki czemu mógłby szybko zapoznać się z bardziej interesującą go ofertą.
