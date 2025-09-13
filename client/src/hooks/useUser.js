@@ -1,22 +1,17 @@
-import { useContext } from "react";
-import { DataContext } from "../DataProvider";
+import {useContext} from "react";
+import {DataContext} from "../DataProvider";
 
 export default function useUser() {
   const { setUser, fetchUser, setUserEvents, getEventsByUser } =
     useContext(DataContext);
 
   const register = async (userData) => {
-    const res = await fetch("/api/auth/register", {
+    return await fetch("/api/auth/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(userData),
       credentials: "include",
     });
-
-    if (res.ok) {
-      return 1;
-    }
-    return 0;
   };
   
   const login = async (userData) => {

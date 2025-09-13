@@ -114,7 +114,7 @@ function EventCard({ event, isFeatured = false }) {
           <CardContent>
             <p className="text-sm">{event.description}</p>
             <p className="text-sm font-medium text-blue-600">
-              {format(parseISO(event.date), "PPPpp")}
+              {format(parseISO(`${event.date}T${event.time}`), "PPPpp")}
             </p>
           </CardContent>
         </Card>
@@ -125,11 +125,11 @@ function EventCard({ event, isFeatured = false }) {
           <DialogDescription>{event.subtitle}</DialogDescription>
           <p className="text-sm text-gray-500">Starts at:</p>
           <p className="text-sm font-medium text-blue-600">
-            {format(parseISO(event.date), "PPPpp")}
+            {format(parseISO(`${event.date}T${event.time}`), "PPPpp")}
           </p>
           <p className="text-sm text-gray-500">Ends at:</p>
           <p className="text-sm font-medium text-blue-600">
-            {format(parseISO(event.endDate), "PPPpp")}
+            {format(parseISO(`${event.endDate}T${event.endTime}`), "PPPpp")}
           </p>
           <Separator></Separator>
           <p className="text-l mt-5">{event.description}</p>

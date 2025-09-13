@@ -38,13 +38,15 @@ export default function Register() {
       lastName: e.target[1].value,
       email: e.target[2].value,
       password: e.target[3].value,
-    }).then((res) => {
-      if (res === 1) {
+    }).then(async (res) => {
+      if (res.ok) {
         alert("Your account has been created");
         setError(null);
         navigate("/login");
       } else {
-        setError("Registration failed");
+        const data = await res.json();
+        const errorMessage = data.message || "Registration failed";
+        setError(errorMessage);
       }
     });
   };
