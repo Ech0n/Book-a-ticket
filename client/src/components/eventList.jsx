@@ -4,7 +4,7 @@ import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
 import EventCard from "@/components/eventCard";
 import { Skeleton } from "@/components/ui/skeleton"
-import { parse } from "date-fns";
+import EventDialog from "./eventDialog";
 
 function EventList({ rows = "2" }) {
     const { allEvents, loading, error } = useContext(DataContext);
@@ -37,7 +37,9 @@ function EventList({ rows = "2" }) {
         <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
                 {paginatedEvents.map((event) => (
-                    <EventCard key={event.id} event={event} />
+                    <EventDialog key={event.id} event={event} >
+                        <EventCard event={event} isFeatured={false} />
+                    </EventDialog>
                 ))}
             </div>
             <Pagination>

@@ -13,6 +13,7 @@ import DataProvider, { DataContext } from '../DataProvider';
 import React, { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 import EventCard from "./eventCard";
+import EventDialog from "./eventDialog";
 
 
 function Featured() {
@@ -41,7 +42,9 @@ function Featured() {
             <CarouselContent>
                 {featuredEvents.map((event) => (
                     <CarouselItem key={event.id} className="basis-1/1">
-                        <EventCard event={event} isFeatured />
+                        <EventDialog event={event} >
+                            <EventCard event={event} isFeatured={true} />
+                        </EventDialog>
                     </CarouselItem>
                 ))}
             </CarouselContent>

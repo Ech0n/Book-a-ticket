@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
+import EventDialog from './eventDialog';
 
 const locales = {
     'en-US': enUS,
@@ -25,6 +26,9 @@ const localizer = dateFnsLocalizer({
 
 export default function Calendar(props) {
     const { allEvents, loading, error } = useContext(DataContext);
+    const [date, setDate] = useState(new Date());
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     if (loading) {
         return (
@@ -58,7 +62,14 @@ export default function Calendar(props) {
         };
     });
     const isToolbarVisible = (toolbar == undefined) ? true : toolbar
-    const [date, setDate] = useState(new Date());
+
+    const handleEventClick = (calendarEvent) => {
+        const originalEvent = allEvents.find(ev => ev.id === calendarEvent.id);
+        if (!originalEvent) return;
+        setSelectedEvent(originalEvent);
+        setIsDialogOpen(true);
+        console.log("Event clicked:", originalEvent)
+    };
     return (
         <div style={{ height: 600, margin: '20px' }}>
             <RBC
@@ -69,12 +80,21 @@ export default function Calendar(props) {
                 startAccessor="start"
                 date={date}
                 endAccessor="end"
+
+                onSelectEvent={handleEventClick}
                 toolbar={isToolbarVisible}
                 style={{ height: '100%' }}
                 onNavigate={(date, view) => {
                     setDate(new Date(date));
                 }}
             />
+            {selectedEvent && (
+                <EventDialog
+                    event={selectedEvent}
+                    isOpen={isDialogOpen}
+                    onOpenChange={setIsDialogOpen}
+                />
+            )}
         </div>
     );
 }

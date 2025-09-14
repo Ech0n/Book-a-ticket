@@ -6,6 +6,7 @@ import { DataContext } from '../DataProvider';
 import { useContext } from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 import EventCard from "./eventCard";
+import EventDialog from "./eventDialog";
 
 function getTime(event) {
     const dateObj = parseISO(`${event.date}T${event.time}`);
@@ -75,7 +76,10 @@ export default function Upcoming({ maxItems }) {
                             <div className="h-[32px] my-2"> </div>
                         )
                         }
-                        <EventCard event={ev} />
+                        <EventDialog event={ev}>
+                            <EventCard event={ev} isFeatured={false} />
+                        </EventDialog>
+
                     </div>
                 ))
             )}
