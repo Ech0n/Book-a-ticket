@@ -29,7 +29,7 @@ Strona powinna być dostępna na [localhost:3000](localhost:3000)
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [Swagger](https://swagger.io/) - Biblioteka generująca dokumentacje API na podstawie komentarzy w kodzie.
-- [SQLite3](https://www.sqlite.org/index.html) - Bazadanych wybrana ze względu na to jak łatwo się z nią pracuje.
+- [SQLite3](https://www.sqlite.org/index.html) - Baza danych wybrana ze względu na to jak łatwo się z nią pracuje.
 - [Sequelize](https://sequelize.org/) - ORM dla Sqlite3
 
 **Client:**
@@ -62,7 +62,7 @@ Dostępne endpointy serwera wylistowane są przez swaggera po uruchomieniu build
 
 Widok aplikacji został wykonany w react. Użyliśmy komponentów shadcn, a własne komponenty wystylizowaliśmy za pomocą tailwind.
 
-Plik wejściowy aplikacji to App.jsx. Komponent App posiada Router zawierający wszystkie Routy dostępne w aplikacji. Router o wrappowany jest w nasz komponent DataProvider odpowiedzialny za z fetchowanie danych z serwera i udostępnienie ich wszystkim komponentą dziecią za pomocą reactowego Context'u.
+Plik wejściowy aplikacji to App.jsx. Komponent App posiada Router zawierający wszystkie Routy dostępne w aplikacji. Router o wrappowany jest w nasz komponent DataProvider odpowiedzialny za z fetchowanie danych z serwera i udostępnienie ich wszystkim komponentom dzieciom za pomocą reactowego Context'u.
 
 ## Organizacja pracy
 
